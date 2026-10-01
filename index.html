@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Website Project Inquiry | Web Developer</title>
+<meta name="description" content="Tell us about your online shop. Choose a package, see exactly what to pay, and send your project details on WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0b2545;
+  --gold:#d99a2b;
+  --paper:#ffffff;
+  --page:#f4f6f9;
+  --line:rgba(11,37,69,.18);
+  --soft:rgba(11,37,69,.06);
+  --muted:rgba(11,37,69,.72);
+  --radius:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  background:var(--page);color:var(--navy);line-height:1.6;font-size:16px;
+}
+.wrap{width:min(100% - 32px,920px);margin-inline:auto}
+
+/* Header */
+header{background:var(--navy);color:#fff;padding:clamp(28px,6vw,56px) 0}
+.brand{font-weight:600;font-size:15px;opacity:.85;margin-bottom:14px}
+header h1{font-size:clamp(26px,5vw,40px);line-height:1.15;font-weight:700;max-width:640px}
+header p{margin-top:14px;max-width:560px;opacity:.85}
+header .rule{width:56px;height:4px;background:var(--gold);border-radius:2px;margin-top:22px}
+
+/* Cards */
+main{padding:24px 0 48px}
+.card{
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+  padding:clamp(18px,4vw,32px);margin-bottom:20px;
+}
+.card h2{font-size:clamp(18px,3vw,22px);font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:12px}
+.card h2 .n{
+  flex:none;width:30px;height:30px;border-radius:50%;background:var(--gold);color:var(--navy);
+  display:grid;place-items:center;font-size:14px;font-weight:700;
+}
+.card .hint{color:var(--muted);font-size:14px;margin:6px 0 20px}
+
+/* Packages */
+.packages{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.pkg{
+  position:relative;display:flex;flex-direction:column;gap:6px;cursor:pointer;
+  border:1px solid var(--line);border-radius:var(--radius);padding:18px;background:var(--paper);
+}
+.pkg input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer}
+.pkg:has(input:checked){border-color:var(--gold);box-shadow:0 0 0 2px var(--gold);background:var(--soft)}
+.pkg:has(input:focus-visible){outline:3px solid var(--navy);outline-offset:2px}
+.pkg .name{font-weight:700;font-size:18px}
+.pkg .price{font-weight:700;font-size:24px}
+.pkg ul{list-style:none;margin-top:6px;font-size:14px;color:var(--muted)}
+.pkg li{padding:4px 0 4px 20px;position:relative}
+.pkg li::before{content:"";position:absolute;left:2px;top:12px;width:8px;height:8px;border-radius:50%;background:var(--gold)}
+
+/* Payment summary */
+.summary{margin-top:20px;background:var(--navy);color:#fff;border-radius:var(--radius);padding:clamp(18px,4vw,26px)}
+.summary .empty{opacity:.85}
+.summary .row{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.18);font-size:15px}
+.summary .row:last-child{border-bottom:0}
+.summary .row span:first-child{opacity:.85}
+.summary .row strong{white-space:nowrap}
+.summary .due{background:var(--gold);color:var(--navy);border-radius:8px;padding:14px 16px;margin:6px 0;border:0}
+.summary .due span:first-child{opacity:1;font-weight:600}
+.summary .due strong{font-size:20px}
+
+/* Fields */
+.grid{display:grid;gap:16px}
+@media(min-width:640px){.grid.two{grid-template-columns:1fr 1fr}.span2{grid-column:1/-1}}
+.field label,.legend{display:block;font-weight:600;font-size:14px;margin-bottom:6px}
+.opt{font-weight:400;color:var(--muted)}
+input[type=text],input[type=tel],input[type=email],input[type=url],select,textarea{
+  width:100%;font:inherit;font-size:16px;color:var(--navy);background:#fff;
+  border:1px solid var(--line);border-radius:8px;padding:12px 14px;
+}
+textarea{min-height:96px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--navy)}
+::placeholder{color:rgba(11,37,69,.45)}
+
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+.check{
+  display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:8px;
+  padding:11px 12px;cursor:pointer;font-size:15px;
+}
+.check input{width:18px;height:18px;accent-color:var(--navy);flex:none}
+.check:has(input:checked){border-color:var(--navy);background:var(--soft)}
+
+/* Pay options */
+.pay{display:grid;gap:14px}
+@media(min-width:640px){.pay{grid-template-columns:1fr 1fr}}
+.pay .box{border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.pay h3{font-size:16px;margin-bottom:6px}
+.pay p{font-size:14px;color:var(--muted);margin-bottom:12px}
+.big{font-size:22px;font-weight:700;letter-spacing:.5px;color:var(--navy);margin-bottom:12px}
+.btn{
+  display:inline-flex;justify-content:center;align-items:center;font:inherit;font-weight:600;
+  text-decoration:none;cursor:pointer;border-radius:8px;padding:13px 20px;border:2px solid var(--navy);
+  background:var(--navy);color:#fff;width:100%;min-height:48px;
+}
+.btn:hover{background:#13355f}
+.btn.ghost{background:transparent;color:var(--navy)}
+.btn.ghost:hover{background:var(--soft)}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy);font-size:17px}
+.btn.gold:hover{background:#c88a21;border-color:#c88a21}
+.btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.note{font-size:13px;color:var(--muted);margin-top:12px}
+.submit{display:grid;gap:12px;margin-top:4px}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:0 0 32px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">Web Developer</div>
+    <h1>Start your online shop project</h1>
+    <p>Choose a package, see exactly what to pay, and tell us about your business. Your answers arrive on WhatsApp so we can start quickly.</p>
+    <div class="rule"></div>
+  </div>
+</header>
+
+<main class="wrap">
+<form id="inquiry" novalidate>
+
+  <!-- 2 Contact -->
+  <section class="card">
+    <h2><span class="n">1</span>Your details</h2>
+    <p class="hint">So we know who to contact.</p>
+    <div class="grid two">
+      <div class="field"><label for="name">Full name</label><input id="name" name="name" type="text" autocomplete="name" required></div>
+      <div class="field"><label for="phone">WhatsApp number</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="07XX XXX XXX" required></div>
+      <div class="field"><label for="email">Email <span class="opt">(optional)</span></label><input id="email" name="email" type="email" autocomplete="email"></div>
+      <div class="field"><label for="location">Town / country</label><input id="location" name="location" type="text" autocomplete="address-level2" required></div>
+    </div>
+  </section>
+
+  <!-- 3 Business -->
+  <section class="card">
+    <h2><span class="n">2</span>Your business</h2>
+    <p class="hint">Help us understand what the website must do.</p>
+    <div class="grid two">
+      <div class="field"><label for="biz">Business name</label><input id="biz" name="biz" type="text" required></div>
+      <div class="field">
+        <label for="bizType">Business type</label>
+        <select id="bizType" name="bizType">
+          <option value="">Select one</option>
+          <option>New business</option>
+          <option>Existing shop going online</option>
+          <option>Marketplace with several sellers</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field span2"><label for="sells">What do you sell?</label><textarea id="sells" name="sells" placeholder="Example: motorcycle helmets, spare parts and accessories" required></textarea></div>
+      <div class="field span2"><label for="customers">Who are your customers? <span class="opt">(optional)</span></label><input id="customers" name="customers" type="text" placeholder="Students, local shoppers, international buyers"></div>
+      <div class="field span2"><label for="existing">Current website or social page <span class="opt">(optional)</span></label><input id="existing" name="existing" type="url" placeholder="https://"></div>
+    </div>
+  </section>
+
+  <!-- 4 Products & Branding -->
+  <section class="card">
+    <h2><span class="n">3</span>Products and branding</h2>
+    <p class="hint">Rough answers are fine. We can refine them later.</p>
+    <div class="grid two">
+      <div class="field">
+        <label for="count">Products at launch</label>
+        <select id="count" name="count">
+          <option value="">Select one</option>
+          <option>Under 30</option><option>30 to 100</option><option>100 to 500</option><option>More than 500</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="photos">Product photos and descriptions</label>
+        <select id="photos" name="photos">
+          <option value="">Select one</option>
+          <option>I will provide them</option><option>I need help with them</option><option>Some of each</option>
+        </select>
+      </div>
+      <div class="field span2"><label for="cats">Main product categories</label><input id="cats" name="cats" type="text" placeholder="Example: Helmets, Jackets, Exhausts"></div>
+      <div class="field">
+        <label for="logo">Logo</label>
+        <select id="logo" name="logo">
+          <option value="">Select one</option>
+          <option>I have a logo</option><option>I need a logo designed</option>
+        </select>
+      </div>
+      <div class="field"><label for="colors">Brand colors <span class="opt">(optional)</span></label><input id="colors" name="colors" type="text" placeholder="Example: black and red"></div>
+      <div class="field span2"><label for="refs">Websites you like <span class="opt">(optional)</span></label><textarea id="refs" name="refs" placeholder="Paste one or more links and say what you like about them"></textarea></div>
+    </div>
+  </section>
+
+  <!-- 5 Features -->
+  <section class="card">
+    <h2><span class="n">4</span>Features you want</h2>
+    <p class="hint">Tick everything that applies. We will confirm what fits your package.</p>
+    <div class="checks">
+      <label class="check"><input type="checkbox" name="features" value="Customer accounts">Customer accounts</label>
+      <label class="check"><input type="checkbox" name="features" value="Wishlist">Wishlist</label>
+      <label class="check"><input type="checkbox" name="features" value="Search and filters">Search and filters</label>
+      <label class="check"><input type="checkbox" name="features" value="Reviews and ratings">Reviews and ratings</label>
+      <label class="check"><input type="checkbox" name="features" value="Request-an-item form">Request-an-item form</label>
+      <label class="check"><input type="checkbox" name="features" value="Service booking">Service booking</label>
+      <label class="check"><input type="checkbox" name="features" value="Order tracking">Order tracking</label>
+      <label class="check"><input type="checkbox" name="features" value="Order alerts">Order alerts by WhatsApp or email</label>
+      <label class="check"><input type="checkbox" name="features" value="Coupons and discounts">Coupons and discounts</label>
+      <label class="check"><input type="checkbox" name="features" value="Newsletter">Newsletter signup</label>
+      <label class="check"><input type="checkbox" name="features" value="Blog">Blog or news</label>
+      <label class="check"><input type="checkbox" name="features" value="Gallery">Photo gallery</label>
+      <label class="check"><input type="checkbox" name="features" value="Multiple currencies">Multiple currencies</label>
+      <label class="check"><input type="checkbox" name="features" value="Several sellers (quoted separately)">Several sellers (quoted separately)</label>
+    </div>
+  </section>
+
+  <!-- 6 Payments & delivery -->
+  <section class="card">
+    <h2><span class="n">5</span>Customer payments and delivery</h2>
+    <p class="hint">How your own customers will pay you and receive orders.</p>
+    <span class="legend">Payment methods for your shop</span>
+    <div class="checks" style="margin-bottom:18px">
+      <label class="check"><input type="checkbox" name="methods" value="M-Pesa">M-Pesa</label>
+      <label class="check"><input type="checkbox" name="methods" value="Cash on delivery">Cash on delivery</label>
+      <label class="check"><input type="checkbox" name="methods" value="Pay through WhatsApp">Pay through WhatsApp</label>
+      <label class="check"><input type="checkbox" name="methods" value="Other">Other</label>
+    </div>
+    <div class="grid two">
+      <div class="field">
+        <label for="delivery">Delivery area</label>
+        <select id="delivery" name="delivery">
+          <option value="">Select one</option>
+          <option>Local only</option><option>Countrywide</option><option>Worldwide</option><option>Pickup only</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="domain">Domain and hosting</label>
+        <select id="domain" name="domain">
+          <option value="">Select one</option>
+          <option>I already have both</option><option>I have a domain only</option><option>I need both</option><option>Not sure</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="timeline">When do you need it?</label>
+        <select id="timeline" name="timeline">
+          <option value="">Select one</option>
+          <option>Within 2 weeks</option><option>2 to 4 weeks</option><option>1 to 2 months</option><option>Flexible</option>
+        </select>
+      </div>
+      <div class="field"><label for="notes">Anything else? <span class="opt">(optional)</span></label><input id="notes" name="notes" type="text"></div>
+    </div>
+  </section>
+
+  <!-- 1 Package -->
+  <section class="card">
+    <h2><span class="n">6</span>Choose your package</h2>
+    <p class="hint">Prices are in Kenya shillings (KES). Hosting, domain and payment-gateway fees are separate.</p>
+    <div class="packages">
+      <label class="pkg">
+        <input type="radio" name="package" value="basic" required>
+        <span class="name">Basic</span>
+        <span class="price">KES 25,000</span>
+        <ul>
+          <li>Up to about 30 products</li>
+          <li>Categories and search</li>
+          <li>Cart sends orders to WhatsApp</li>
+          <li>Home, About and Contact pages</li>
+        </ul>
+      </label>
+      <label class="pkg">
+        <input type="radio" name="package" value="standard">
+        <span class="name">Standard</span>
+        <span class="price">KES 30,000</span>
+        <ul>
+          <li>Everything in Basic</li>
+          <li>Admin panel and order management</li>
+          <li>Customer accounts and wishlist</li>
+          <li>M-Pesa payment and cash on delivery</li>
+        </ul>
+      </label>
+      <label class="pkg">
+        <input type="radio" name="package" value="premium">
+        <span class="name">Premium</span>
+        <span class="price">KES 50,000</span>
+        <ul>
+          <li>Everything in Standard</li>
+          <li>Custom filters, such as search by vehicle</li>
+          <li>Item requests and service booking</li>
+          <li>Reviews, coupons, tracking, 1 month support</li>
+        </ul>
+      </label>
+    </div>
+
+    <div class="summary" id="summary" aria-live="polite">
+      <p class="empty">Select a package to see your payment schedule.</p>
+    </div>
+  </section>
+
+  <!-- 7 Pay deposit -->
+  <section class="card">
+    <h2><span class="n">7</span>Pay your starting deposit</h2>
+    <p class="hint">Work begins once the 20% deposit is received. Pay by either option, then enter the transaction code below.</p>
+    <div class="pay">
+      <div class="box">
+        <h3>PayHero payment link</h3>
+        <p>Open the secure link and pay the deposit amount shown in your summary.</p>
+        <a class="btn" href="https://lipwa.link/4653" target="_blank" rel="noopener">Open payment link</a>
+      </div>
+      <div class="box">
+        <h3>Airtel Money</h3>
+        <p>Send the deposit amount to this number.</p>
+        <div class="big" id="airtel">0762170207</div>
+        <button type="button" class="btn ghost" id="copy">Copy number</button>
+      </div>
+    </div>
+    <div class="grid" style="margin-top:18px">
+      <div class="field">
+        <label for="ref">Transaction code <span class="opt">(optional, add it once you have paid)</span></label>
+        <input id="ref" name="ref" type="text" placeholder="Example: SBK3XXXXXX" autocomplete="off">
+      </div>
+    </div>
+  </section>
+
+  <div class="submit">
+    <button type="submit" class="btn gold">Send inquiry on WhatsApp</button>
+    <p class="note" style="text-align:center">Your details open in WhatsApp, ready to send. Nothing is shared until you press send there.</p>
+  </div>
+</form>
+</main>
+
+<footer>&copy; <span id="yr"></span> Web Developer. All rights reserved.</footer>
+
+<script>
+(function(){
+  var WHATSAPP = "254711416574";
+  var PKG = {
+    basic:    {name:"Basic",    price:25000},
+    standard: {name:"Standard", price:30000},
+    premium:  {name:"Premium",  price:50000}
+  };
+  var form = document.getElementById("inquiry");
+  var summary = document.getElementById("summary");
+  var kes = function(n){ return "KES " + n.toLocaleString("en-KE"); };
+
+  function split(price){
+    var start = Math.round(price * 0.20);
+    var mid   = Math.round(price * 0.50);
+    return {start:start, mid:mid, end:price - start - mid};
+  }
+  function selected(){
+    var r = form.querySelector('input[name="package"]:checked');
+    return r ? PKG[r.value] : null;
+  }
+  function render(){
+    var p = selected();
+    if(!p){ return; }
+    var s = split(p.price);
+    summary.innerHTML =
+      '<div class="row"><span>' + p.name + ' package total</span><strong>' + kes(p.price) + '</strong></div>' +
+      '<div class="row due"><span>Pay now to start (20%)</span><strong>' + kes(s.start) + '</strong></div>' +
+      '<div class="row"><span>When the site is ready on localhost (50%)</span><strong>' + kes(s.mid) + '</strong></div>' +
+      '<div class="row"><span>When the site goes live (30%)</span><strong>' + kes(s.end) + '</strong></div>';
+  }
+  form.addEventListener("change", function(e){
+    if(e.target.name === "package"){ render(); }
+  });
+
+  document.getElementById("copy").addEventListener("click", function(){
+    var btn = this, num = document.getElementById("airtel").textContent;
+    var done = function(){ btn.textContent = "Copied"; setTimeout(function(){ btn.textContent = "Copy number"; }, 1800); };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(num).then(done, function(){ btn.textContent = num; });
+    } else { btn.textContent = num; }
+  });
+
+  function line(label, value){ return value ? label + ": " + value + "\n" : ""; }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    if(!form.checkValidity()){ form.reportValidity(); return; }
+    var f = new FormData(form);
+    var p = selected();
+    var s = split(p.price);
+    var msg =
+      "*NEW WEBSITE INQUIRY*\n\n" +
+      "*Package:* " + p.name + " (" + kes(p.price) + ")\n" +
+      "Deposit due now (20%): " + kes(s.start) + "\n" +
+      "At localhost (50%): " + kes(s.mid) + "\n" +
+      "At live launch (30%): " + kes(s.end) + "\n" +
+      line("Transaction code", (f.get("ref") || "").trim()) +
+      "\n*Client*\n" +
+      line("Name", f.get("name")) + line("WhatsApp", f.get("phone")) +
+      line("Email", f.get("email")) + line("Location", f.get("location")) +
+      "\n*Business*\n" +
+      line("Business", f.get("biz")) + line("Type", f.get("bizType")) +
+      line("Sells", f.get("sells")) + line("Customers", f.get("customers")) +
+      line("Existing site", f.get("existing")) +
+      "\n*Products and branding*\n" +
+      line("Products at launch", f.get("count")) + line("Photos and text", f.get("photos")) +
+      line("Categories", f.get("cats")) + line("Logo", f.get("logo")) +
+      line("Colors", f.get("colors")) + line("Websites liked", f.get("refs")) +
+      "\n*Features*\n" + (f.getAll("features").join(", ") || "None selected") + "\n" +
+      "\n*Payments and delivery*\n" +
+      line("Shop payments", f.getAll("methods").join(", ")) + line("Delivery", f.get("delivery")) +
+      line("Domain and hosting", f.get("domain")) + line("Needed", f.get("timeline")) +
+      line("Notes", f.get("notes"));
+    var url = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg.trim());
+    var w = window.open(url, "_blank", "noopener");
+    if(!w){ window.location.href = url; }
+  });
+
+  document.getElementById("yr").textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
